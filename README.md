@@ -7,6 +7,7 @@ Voice coordination
 
 
 Upload content on social network
+- gmail
 - tiktok
 - twitter
 - instagram
