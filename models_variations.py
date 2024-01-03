@@ -32,6 +32,6 @@ for i in range(100):
         num_inference_steps=140  
                ).images[0]
     torch.cuda.empty_cache()
-    image.save(f'./results/sexyc/picture_{i}.jpg')
+
     images.append(image)
     
