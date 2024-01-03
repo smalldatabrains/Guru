@@ -1,0 +1,5 @@
+torch 
+torchvision 
+torchaudio 
+https://download.pytorch.org/whl/cu118
+diffusers
