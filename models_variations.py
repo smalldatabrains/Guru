@@ -17,14 +17,12 @@ pipe = pipe.to("cuda")
 
 images=[]
 background=['bedroom','nature','stadium', 'office']
-style=['portrait', 'close portrait', 'full body','suggestive position']
-position=['standing','sitting','laying on bed','doggystyle']
+
 camera=[]
 
 for i in range(100):
     pipe.safety_checker = None
     pipe.requires_safety_checker = False
-    prompt="sexy naked young woman,"+ random.choice(position) +",long hair, bronzed skin,"+ random.choice(style) +", lingerie,"+ random.choice(background) +" background, 8k uhd, high quality, dramatic, cinematic"
     print(prompt)
     image=pipe(
         prompt=prompt,  
