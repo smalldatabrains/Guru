@@ -27,7 +27,6 @@ for i in range(100):
     pipe.safety_checker = None
     pipe.requires_safety_checker = False
     prompt="ghibli style, freeze corleone, central cee, with dark hoodie and cap "
-    #prompt=random.choice(appearance) + " 25 yo dark hair woman, "+ random.choice(position) +","+ random.choice(style) +","+ random.choice(background) +" background, nsfw, 8K, masterpiece, ultra high res, (photorealistic:1.3), hyper detailed, raw photo, egirl, natural skin texture, street fashion photography, dark, black, (black dress:1.1), Egyptian queen, (gold:1.3), bride, old egypt, modeling for playboy, film grain,  high fashion, top model"
     print(prompt)
     image=pipe(
         prompt=prompt,  
