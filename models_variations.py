@@ -8,32 +8,36 @@ torch.cuda.empty_cache()
 #check if cuda is well installed on the local machine
 print(torch.cuda.is_available())
 
-model_id='./model/dreamlike-photoreal-2.0.ckpt'
+model_id='./model/ghibli_style_offset.safetensors'
 
 #load stable diffusion model
 #pipe = StableDiffusionPipeline.from_single_file(model_id, torch_dtype=torch.float16)
-pipe = StableDiffusionPipeline.from_single_file('./model/realisticVisionV60B1_v60B1VAE.safetensors',torch_dtype=torch.float16,safety_checker=None)
+pipe = StableDiffusionPipeline.from_single_file('./model/ghibli_style_offset.safetensors',torch_dtype=torch.float16,safety_checker=None)
 pipe = pipe.to("cuda")
 
 images=[]
-background=['bedroom','nature','stadium', 'office']
-style=['portrait', 'close portrait', 'full body','suggestive position']
-position=['standing','sitting','laying on bed','doggystyle']
+background=[]
+style=[]
+appearance=[]
+position=[]
 camera=[]
+init_image=None
 
 for i in range(100):
     pipe.safety_checker = None
     pipe.requires_safety_checker = False
-    prompt="sexy naked young woman,"+ random.choice(position) +",long hair, bronzed skin,"+ random.choice(style) +", lingerie,"+ random.choice(background) +" background, 8k uhd, high quality, dramatic, cinematic"
+    prompt="ghibli style, freeze corleone, central cee, with dark hoodie and cap "
+    #prompt=random.choice(appearance) + " 25 yo dark hair woman, "+ random.choice(position) +","+ random.choice(style) +","+ random.choice(background) +" background, nsfw, 8K, masterpiece, ultra high res, (photorealistic:1.3), hyper detailed, raw photo, egirl, natural skin texture, street fashion photography, dark, black, (black dress:1.1), Egyptian queen, (gold:1.3), bride, old egypt, modeling for playboy, film grain,  high fashion, top model"
     print(prompt)
     image=pipe(
         prompt=prompt,  
-        negative_prompt="(deformed iris, deformed face,deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime), text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers",  
-        width=600,  
-        height=800,
-        num_inference_steps=140  
+        negative_prompt="(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime), text, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck",  
+        image=init_image,
+        width=800,  
+        height=600,
+        num_inference_steps=160 
                ).images[0]
     torch.cuda.empty_cache()
-    image.save(f'./results/sexyc/picture_{i}.jpg')
+    image.save(f'./results/picture_{i}.jpg')
     images.append(image)
     
