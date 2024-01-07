@@ -8,11 +8,11 @@ torch.cuda.empty_cache()
 #check if cuda is well installed on the local machine
 print(torch.cuda.is_available())
 
-model_id='./model/ghibli_style_offset.safetensors'
+model_id='./model/realisticVisionV60B1_v60B1VAE.safetensors'
 
 #load stable diffusion model
 #pipe = StableDiffusionPipeline.from_single_file(model_id, torch_dtype=torch.float16)
-pipe = StableDiffusionPipeline.from_single_file('./model/ghibli_style_offset.safetensors',torch_dtype=torch.float16,safety_checker=None)
+pipe = StableDiffusionPipeline.from_single_file('./model/realisticVisionV60B1_v60B1VAE.safetensors',torch_dtype=torch.float16,safety_checker=None)
 pipe = pipe.to("cuda")
 
 images=[]
