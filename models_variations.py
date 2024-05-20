@@ -26,7 +26,7 @@ init_image=None
 for i in range(100):
     pipe.safety_checker = None
     pipe.requires_safety_checker = False
-    prompt="ghibli style, freeze corleone, central cee, with dark hoodie and cap "
+    prompt="cartoon pokemon with long ears and bunny face, fighting position, cartoon, manag, colorful, 4k, cinematic"
     print(prompt)
     image=pipe(
         prompt=prompt,  
@@ -37,6 +37,6 @@ for i in range(100):
         num_inference_steps=160 
                ).images[0]
     torch.cuda.empty_cache()
-    image.save(f'./results/picture_{i}.jpg')
+    image.save(f'./results/picture_{i+5}.jpg')
     images.append(image)
     
